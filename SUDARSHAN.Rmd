@@ -1,0 +1,73 @@
+---
+title: "FML 1-811287455"
+output: html_document
+date: "2023-09-09"
+---
+#PART A-IMPORTING THE DATASET 
+
+#DATASET-
+
+
+```{r}
+my <- read.csv("/Users/sudarshan/Downloads/exams.csv")
+my
+```
+#PART B 
+#DESCRIPTIVE STATISTICS FOR NUMERIC VARIABLES
+
+```{r}
+summary(my)
+
+mean(my$math.score)
+
+median(my$math.score)
+
+min(my$math.score)
+
+max(my$math.score)
+
+var(my$math.score)
+
+sd(my$math.score)
+
+str(my$math.score)
+```
+#PART C 
+#DESCRIPTIVE STATISTICS FOR QUALITATIVE DATA 
+
+```{r}
+table(my$reading.score)
+
+my$reading.score
+
+table(my$gender)
+
+str(my$reading.score)
+```
+#PART D 
+#TRANSFORMING VARIABLES
+
+```{r}
+
+log(my$math.score)
+
+log(my$writing.score)
+
+h<-my$math.score-my$writing.score - min(my$reading.score)/max(my$writing.score)
+h
+```
+#PART E
+#PLOTTING THE VARIABLE 
+
+```{r}
+hist(my$math.score,main="HISTOGRAM OF math.score")
+
+```
+#PART F
+#SCATTER PLOT 
+
+```{r}
+plot(my$math.score,my$reading.score,main="scatterplot")
+
+```
+

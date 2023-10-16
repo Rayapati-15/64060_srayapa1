@@ -3,8 +3,8 @@ title: "Assignment 3 FML"
 author: "Sudarshan.Rayapati"
 date: "2023-10-15"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ``````{r setup, include=TRUE,  results='hide'}
@@ -14,9 +14,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ***
 # Summary
-# 1:-According to the given dataset, if an accident has just been reported and no further information is available, there is a 50.88% chance that the injury has taken place, because data suggests that previously out of 42,183 cases, 21,462 cases have reported "injury=yes".
+Q1. Using the information in this dataset, if an accident has just been reported and no further information is available, what should the prediction be? (INJURY = Yes or No?) Why?
+Ans:-According to the given dataset, if an accident has just been reported and no further information is available, there is a 50.88% chance that the injury has taken place, because data suggests that previously out of 42,183 cases, 21,462 cases have reported "injury=yes".
 
-# 2.1: The exact Bayes conditional probabilities of an injury (INJURY = Yes) for the six possible combinations of the predictons are:
+Q2. Select the first 24 records in the dataset and look only at the response (INJURY) and the two predictors WEATHER_R and TRAF_CON_R. Create a pivot table that examines INJURY as a function of the two predictors for these 12 records. Use all three variables in the pivot table as rows/columns.
+Compute the exact Bayes conditional probabilities of an injury (INJURY = Yes) given the six possible combinations of the predictors.
+A: The exact Bayes conditional probabilities of an injury (INJURY = Yes) for the six possible combinations of the predictons are:
 
 Predictor combination	Probability
 WEATHER_R = 1 and TRAF_CON_R = 1	0.6666667
@@ -25,7 +28,9 @@ WEATHER_R = 1 and TRAF_CON_R = 1	0.0000000
 WEATHER_R = 2 and TRAF_CON_R = 1	0.0000000
 WEATHER_R = 1 and TRAF_CON_R = 2	0.0000000
 WEATHER_R = 2 and TRAF_CON_R = 2	1.0000000
-2.2: The Classification of the 24 accidents using their probabilities and a cutoff of 0.5 quantitatively are:
+
+2.2:-Classify the 24 accidents using these probabilities and a cutoff of 0.5.
+A: The Classification of the 24 accidents using their probabilities and a cutoff of 0.5 quantitatively are:
 
 [0.6666667 0.1818182 0.0000000 0.0000000 0.6666667 0.1818182 0.1818182 0.6666667 0.1818182 0.1818182 0.1818182 0.0000000 0.6666667 0.6666667 0.6666667 0.6666667 0.1818182 0.1818182 0.1818182 0.1818182 0.6666667 0.6666667 1.0000000 0.1818182]
 
@@ -33,11 +38,14 @@ qualitatively are:
 
 ["yes" "no" "no" "no" "yes" "no" "no" "yes" "no" "no" "no" "no" "yes" "yes" "yes" "yes" "no" "no" "no" "no" "yes" "yes" "yes" "no"]
 
-# 2.3: The Computation of the naive Bayes conditional probability of an injury given WEATHER_R = 1 and TRAF_CON_R = 1 manually the output is "0".
+2.3:-Compute manually the naive Bayes conditional probability of an injury given WEATHER_R = 1 and TRAF_CON_R = 1.
+A. The Computation of the naive Bayes conditional probability of an injury given WEATHER_R = 1 and TRAF_CON_R = 1 manually the output is "0".
 
-# 2.4: Now, after applying the naïve Bayes classifier to the 24 records and two predictors, checking the model output to get probabilities and classifications for all 24 records, it was identified that the result of  classification and ranks were not equal as the Exact Bayes caluclation.
+2.4:-Run a naive Bayes classifier on the 24 records and two predictors. Check the model output to obtain probabilities and classifications for all 24 records. Compare this to the exact Bayes classification. Are the resulting classifications equivalent? Is the ranking (= ordering) of observations equivalent?
+A. Now, after applying the naïve Bayes classifier to the 24 records and two predictors, checking the model output to get probabilities and classifications for all 24 records, it was identified that the result of  classification and ranks were not equal as the Exact Bayes caluclation.
 
-# 3.1: When we applied the naive Bayes classifier to the full training set with the key predictors and used "INJURY" as the response, the results shows us confusion matrix and statistics. The accuracy of the model turned out to be 53.7%. This tells us that the model predicts whether an accident causes injury or not.
+3.1:-Let us now return to the entire dataset. Partition the data into training (60%) and validation (40%).  Run a naive Bayes classifier on the complete training set with the relevant predictors(and INJURY as the response). Note that all predictors are categorical. Show the confusion matrix.
+A. When we applied the naive Bayes classifier to the full training set with the key predictors and used "INJURY" as the response, the results shows us confusion matrix and statistics. The accuracy of the model turned out to be 53.7%. This tells us that the model predicts whether an accident causes injury or not.
 
 Confusion Matrix and Statistics
 
@@ -48,9 +56,10 @@ Prediction   no  yes
                                           
                Accuracy : 0.537  
 
-# 3.2: the overall error of the validation set is "46.3".
+3.2:-What is the overall error of the validation set?
+A. The overall error of the validation set is "46.3".
 
-****
+***
 # Problem Statement
 
 The file accidentsFull.csv contains information on 42,183 actual automobile accidents in 2001 in the United States that involved one of three levels of injury: NO INJURY, INJURY, or FATALITY. For each accident, additional information is recorded, such as day of week, weather conditions, and road type.
@@ -58,7 +67,7 @@ A firm might be interested in developing a system for quickly classifying the se
 
 Our aim is to predict whether an accident just reported will involve an injury (MAX_SEV_IR = 1 or 2) or will not (MAX_SEV_IR = 0). For this purpose, create a dummy variable called INJURY that takes the value “yes” if MAX_SEV_IR = 1 or 2, and otherwise “no.”
 
-******
+***
   
 ## Data Input and Cleaning
 Loading the required libraries and reading the input file
@@ -87,6 +96,7 @@ for (i in c(1:dim(accidents_24)[2])){
 }
 head(accidents_24,n=24)
 ```
+
 ***
 # Q2. Select the first 24 records in the dataset and look only at the response (INJURY) and the two predictors WEATHER_R and TRAF_CON_R. Create a pivot table that examines INJURY as a function of the two predictors for these 12 records. Use all three variables in the pivot table as rows/columns.
   
@@ -247,19 +257,8 @@ confusionMatrix(valid.df$INJURY, predict(nbTotal, valid.df[, vars]), positive = 
 #Calculating the overall error
 
 ver=1-0.5331
-verp=ver*100
+verp=ver
 paste("Overall Error: ",verp)
 ```
 
-
-***
-###CONCLUSION 
-
-Using two predictors both times, the Naive Bayes classifier was applied to first predict injury outcomes in a data set of 24 records and subsequently to the whole data set.
-
-Using the exact Bayes classifier for the first 24 records, we identified that the most risky combination for drivers is WEATHER_CON=2,TRAF_CON=0 since the injury is max at "1" in this case.
-
-The model has a validation error of 46.3% and a training set accuracy of 53.7%, showing a modest level of prediction. However, it makes the assumption that the prediction variables are independent, which may not always be the case in real-world situations and might result in errors.But for classification and ranking, we may use the Naive Bayes classifier.
-
-While Naive Bayes is a simple and effective algorithm for injury outcome prediction, it's crucial to remember its limitations.
 
